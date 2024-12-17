@@ -28,7 +28,6 @@ services:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./file-salad-backend-api/src/main/resources/init-db:/docker-entrypoint-initdb.d
 
   adminer:
     image: adminer

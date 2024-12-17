@@ -33,6 +33,8 @@ public class FileService {
     private final KeyWordRepository keyWordRepository;
     private final SavedFileRepository savedFileRepository;
 
+    private final List<String> keyWords;
+
     @PostConstruct
     public void init() throws IOException {
         // Ensure file storage directory exists
@@ -40,6 +42,60 @@ public class FileService {
         if (!Files.exists(storagePath)) {
             Files.createDirectories(storagePath);
         }
+
+        keyWords.add("tomato");
+        keyWords.add("cucumber");
+        keyWords.add("apple");
+        keyWords.add("banana");
+        keyWords.add("orange");
+        keyWords.add("grape");
+        keyWords.add("watermelon");
+        keyWords.add("peach");
+        keyWords.add("cherry");
+        keyWords.add("strawberry");
+        keyWords.add("blueberry");
+        keyWords.add("raspberry");
+        keyWords.add("blackberry");
+        keyWords.add("kiwi");
+        keyWords.add("mango");
+        keyWords.add("pineapple");
+        keyWords.add("pear");
+        keyWords.add("plum");
+        keyWords.add("apricot");
+        keyWords.add("fig");
+        keyWords.add("papaya");
+        keyWords.add("pomegranate");
+        keyWords.add("lemon");
+        keyWords.add("lime");
+        keyWords.add("grapefruit");
+        keyWords.add("melon");
+        keyWords.add("nectarine");
+        keyWords.add("date");
+        keyWords.add("coconut");
+        keyWords.add("avocado");
+        keyWords.add("spinach");
+        keyWords.add("lettuce");
+        keyWords.add("broccoli");
+        keyWords.add("cauliflower");
+        keyWords.add("carrot");
+        keyWords.add("beet");
+        keyWords.add("potato");
+        keyWords.add("onion");
+        keyWords.add("garlic");
+        keyWords.add("zucchini");
+        keyWords.add("pumpkin");
+        keyWords.add("radish");
+        keyWords.add("peas");
+        keyWords.add("bean");
+        keyWords.add("corn");
+        keyWords.add("eggplant");
+        keyWords.add("bellpepper");
+        keyWords.add("chili");
+        keyWords.add("mushroom");
+        keyWords.add("celery");
+        keyWords.add("asparagus");
+
+        keyWordRepository.saveAll(keyWords.stream().map(x -> KeyWord.builder().keyWord(x).build()).toList());
     }
 
     public Map<String, Object> handleFileUpload(MultipartFile file) throws IOException {
