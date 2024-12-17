@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/saladdb
+      - SPRING_DATASOURCE_USERNAME=saladuser
+      - SPRING_DATASOURCE_PASSWORD=saladpass
+      - FILE_STORAGE_PATH=/storage
+    volumes:
+      - app-storage:/storage
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16.0
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: saladdb
+      POSTGRES_USER: saladuser
+      POSTGRES_PASSWORD: saladpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./file-salad-backend-api/src/main/resources/init-db:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer
+    container_name: adminer_ui
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+  app-storage:
