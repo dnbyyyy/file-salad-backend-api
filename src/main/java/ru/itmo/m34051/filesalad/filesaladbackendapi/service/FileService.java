@@ -12,6 +12,8 @@ import ru.itmo.m34051.filesalad.filesaladbackendapi.repository.KeyWordRepository
 import ru.itmo.m34051.filesalad.filesaladbackendapi.repository.SavedFileRepository;
 
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -129,7 +131,7 @@ public class FileService {
         );
     }
 
-    public Map<String, Object> handleFileDownload(String firstWord, String secondWord, String thirdWord) {
+    public Map<String, Object> handleFileDownload(String firstWord, String secondWord, String thirdWord) throws UnknownHostException {
         String key = String.join("_", List.of(firstWord, secondWord, thirdWord));
         Optional<SavedFile> savedFileOpt = savedFileRepository.findByKey(key);
         if (savedFileOpt.isEmpty()) {
@@ -137,7 +139,7 @@ public class FileService {
         }
         SavedFile savedFile = savedFileOpt.get();
         return Map.of(
-                "downloadLink", savedFile.getFilePath(),
+                "downloadLink", "http://" + Inet4Address.getLocalHost() + ":8080/download/" + savedFile.getFileName(),
                 "fileName", savedFile.getFileName()
         );
     }
