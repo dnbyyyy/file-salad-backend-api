@@ -38,9 +38,9 @@ public class FileService {
     @PostConstruct
     public void init() throws IOException {
         // Ensure file storage directory exists
-        Path storagePath = Paths.get(fileStoragePath);
+        Path storagePath = Paths.get(System.getProperty("user.dir") + "/" + fileStoragePath);
         if (!Files.exists(storagePath)) {
-            Files.createDirectories(storagePath);
+            Files.createDirectory(storagePath);
         }
 
         keyWords.add("tomato");
@@ -96,12 +96,15 @@ public class FileService {
         keyWords.add("asparagus");
 
         keyWordRepository.saveAll(keyWords.stream().map(x -> KeyWord.builder().keyWord(x).build()).toList());
+
+
     }
 
     public Map<String, Object> handleFileUpload(MultipartFile file) throws IOException {
         // Save file to storage
         UUID uuid = UUID.randomUUID();
-        Path filePath = Paths.get(fileStoragePath, uuid + "_" + file.getOriginalFilename());
+        Path filePath = Paths.get(System.getProperty("user.dir") + "/" + fileStoragePath,
+                uuid + "_" + file.getOriginalFilename());
         Files.write(filePath, file.getBytes());
 
         // Get unique keywords

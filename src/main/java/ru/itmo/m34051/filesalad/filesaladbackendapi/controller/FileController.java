@@ -27,7 +27,7 @@ public class FileController {
             Map<String, Object> response = fileService.handleFileUpload(file);
             return ResponseEntity.ok(response);
         } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "File upload failed."));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "   d."));
         }
     }
 

@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://db:5432/saladdb}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/saladdb}
     username: ${SPRING_DATASOURCE_USERNAME:saladuser}
     password: ${SPRING_DATASOURCE_PASSWORD:saladpass}
     driver-class-name: org.postgresql.Driver
@@ -17,10 +17,14 @@ spring:
   flyway:
     enabled: false
     locations: classpath:db/migration
+  servlet:
+    multipart:
+      max-file-size: 150MB
+      max-request-size: 150MB
 
 file:
   storage:
-    path: ${FILE_STORAGE_PATH:/tmp/storage}
+    path: ${FILE_STORAGE_PATH:/storage}
 
 logging:
   level:
