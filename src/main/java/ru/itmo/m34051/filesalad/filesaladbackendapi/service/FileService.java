@@ -38,7 +38,7 @@ public class FileService {
     @PostConstruct
     public void init() throws IOException {
         // Ensure file storage directory exists
-        Path storagePath = Paths.get(System.getProperty("user.dir") + "/" + fileStoragePath);
+        Path storagePath = Paths.get(Paths.get("").toAbsolutePath() + "/" + fileStoragePath);
         if (!Files.exists(storagePath)) {
             Files.createDirectory(storagePath);
         }
