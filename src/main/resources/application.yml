@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/saladdb}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://db:5432/saladdb}
     username: ${SPRING_DATASOURCE_USERNAME:saladuser}
     password: ${SPRING_DATASOURCE_PASSWORD:saladpass}
     driver-class-name: org.postgresql.Driver
