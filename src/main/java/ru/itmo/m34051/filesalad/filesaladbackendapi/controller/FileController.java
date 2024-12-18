@@ -19,6 +19,7 @@ import ru.itmo.m34051.filesalad.filesaladbackendapi.service.FileService;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.nio.file.Paths;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class FileController {
     }
 
     @GetMapping("/files/download")
-    public ResponseEntity<Map<String, Object>> downloadFile(@RequestParam String firstWord, @RequestParam String secondWord, @RequestParam String thirdWord) {
+    public ResponseEntity<Map<String, Object>> downloadFile(@RequestParam String firstWord, @RequestParam String secondWord, @RequestParam String thirdWord) throws UnknownHostException {
         Map<String, Object> response = fileService.handleFileDownload(firstWord, secondWord, thirdWord);
         if (response == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "File not found."));
